@@ -1,6 +1,6 @@
 list.files('Data/', pattern='.csv$', recursive=T)
 length(list.files('Data/', pattern = '.csv$', recursive =T))
-read.csv('Data/wingspan_vs_mass.csv')
+df <- read.csv('Data/wingspan_vs_mass.csv')
 head(df, 5)
 b_files <- list.files('Data/', pattern='^b', recursive=T)
 for (i in b_files) {
