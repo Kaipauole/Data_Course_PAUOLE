@@ -1,0 +1,92 @@
+---
+title: "Assignment_9"
+author: "Kai Pauole"
+date: "2026-04-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data 
+Here I will inspect the data GradSchool_Admissions and predict the chances of graduating. 
+
+```{r}
+# load packages
+library(tidyverse)
+library(ggplot2)
+library(easystats)
+library(broom)
+
+# load data
+graduation = read.csv("C:/Users/kaipa/Downloads/Data_Course_PAUOLE/Data/GradSchool_Admissions.csv")
+```
+
+```{r}
+head(graduation)
+str(graduation)
+```
+Data need to be cleaned a bit. Rank needs to change to a factor. Also need to look for any missing values.
+
+```{r}
+# Convert rank to factor
+graduation$rank <- as.factor(graduation$rank)
+
+# check for na or missing
+sum(is.na(graduation))
+
+```
+## Exploratory Data Analysis
+
+First I will look at GPA vs. admit
+```{r}
+ggplot(graduation, aes(x = gpa, fill = factor(admit))) +
+  geom_density(alpha = 0.5) +
+  labs(fill = "Admit")
+```
+This shows that even if someone got a high GPA does not guarantee acceptance, but your chances are higher. 
+
+
+Second GRV vs. admit
+```{r}
+ggplot(graduation, aes(x = gre, fill = factor(admit))) +
+  geom_density(alpha = 0.5) +
+  labs(fill = "Admit")
+```
+This shows that Even with a high GRE you also do not have a chance of getting in, but your chances are higher.
+
+
+Lastly rank vs. admit, because of the values of rank I will just use a bar graph
+```{r}
+ggplot(graduation, aes(x = rank, fill = factor(admit))) + geom_bar(position = 'fill') + labs(y = 'admitted')
+```
+This does seem to show that rank of the institution you attend increases the chance of getting admitted. 
+
+How do these correlate? Lets explore. 
+```{r}
+mod1 = glm(admit ~ gre + gpa + rank,
+              data = graduation,
+              family = binomial)
+
+summary(mod1)
+```
+Rank, gpa, and gre together are needed to make the best predictions.
+
+## Predictions 
+
+Here we will make predictions 
+```{r}
+graduation$predicted_prob = predict(mod1, type = "response")
+
+head(graduation)
+```
+
+This shows the probability of getting admitted based on all three values.
+
+
+
+
+
+
+
