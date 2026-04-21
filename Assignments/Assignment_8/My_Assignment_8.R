@@ -10,7 +10,7 @@ library(tidyverse)
 library(ggplot2)
 library(performance)
 
-Mushrooms = read.csv("C:/Users/kaipa/Downloads/Data_Course_PAUOLE/Data/mushroom_growth.csv")
+Mushrooms = read.csv("mushroom_growth.csv")
 Mushrooms %>% 
   ggplot(aes(x = Temperature,
              y = GrowthRate))+
@@ -79,4 +79,6 @@ Mushrooms %>%
   geom_point(aes(x = Predicited_growth,
                  color = 'Predicited'))+
   theme_minimal()
+
+list.files()
 
