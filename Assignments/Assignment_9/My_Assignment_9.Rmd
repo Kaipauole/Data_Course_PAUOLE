@@ -20,7 +20,7 @@ library(easystats)
 library(broom)
 
 # load data
-graduation = read.csv("C:/Users/kaipa/Downloads/Data_Course_PAUOLE/Data/GradSchool_Admissions.csv")
+graduation = read.csv("GradSchool_Admissions.csv")
 ```
 
 ```{r}
