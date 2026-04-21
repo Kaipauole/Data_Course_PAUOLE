@@ -1,4 +1,4 @@
-Utah_religins = read.csv("C:/Users/kaipa/Downloads/Data_Course_PAUOLE/Assignments/Assignment_7/Utah_Religions_by_County.csv")
+Utah_religins = read.csv("Utah_Religions_by_County.csv")
 library('easystats')
 
 Utah_religinsss = Utah_religins %>% 
